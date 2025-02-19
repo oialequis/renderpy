@@ -1,1 +1,1 @@
-worker: python contador.py
+python contador.py
