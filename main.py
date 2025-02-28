@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import os
-import xlsxwriter 
 
 
 def botao_teste():
@@ -28,19 +27,6 @@ def botao_teste():
     # Remoção de dados com .loc
     funcao_para_remover = ['AUTONOMO','MEDICO RESIDENTE','ENFERMEIRO RESIDENTE']
     df_filtro = df_filtro.loc[~df_filtro['Desc.Funcao'].str.lower().isin([funcao.lower() for funcao in funcao_para_remover])]
-
-
-    writer = pd.ExcelWriter('novo_arquivo.xlsx', engine='xlsxwriter')
-    df_filtro.to_excel(writer, index=False)
-
-    workbook = writer.book
-    worksheet = writer.sheets['Sheet1']
-
-    for i, column in enumerate(df_filtro.columns):
-        column_len = df_filtro[column].astype(str).str.len().max()
-        worksheet.set_column(i, i, column_len + 2)
-
-    writer.close()
 
     grafico_filtrado = df_filtro.loc[:, 'Sit. Folha'].value_counts()
     # Tratar valores ausentes e converter para inteiro
