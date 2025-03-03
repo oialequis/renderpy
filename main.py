@@ -1,11 +1,6 @@
 import streamlit as st
 import pandas as pd
 import os
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 655b46e (Atualização do código)
 
 
 def botao_teste():
