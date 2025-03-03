@@ -1,6 +1,14 @@
 import streamlit as st
-import time
 import pandas as pd
+import sqlite3 as db
+
+
+# Criar conexão com o banco de dados SQLite
+conn = db.connect("database.db", check_same_thread=False)
+cursor = conn.cursor()
+def validar_login(nome, senha):
+    cursor.execute("SELECT * FROM usuarios WHERE nome = ? AND senha = ?", (nome, senha))
+    return cursor.fetchone() is not None
 
 
 
@@ -43,12 +51,13 @@ def botao_teste():
     st.write(grafico_filtrado)
 
 
-def login(username, password):
-    if username == "Alex" and password == "123":
+   
+def login():
+    if validar_login(username, password):
         st.success("LOGADO COM SUCESSO")
         st.session_state.show_login = False
         st.rerun()
-        time.sleep(8)
+    
         
     else:
         st.error("USUÁRIO OU SENHA INCORRETOS")
@@ -65,9 +74,15 @@ if st.session_state.show_login:
     st.title("ENTRAR")
     username = st.text_input("USUÁRIO")
     password = st.text_input("SENHA", type='password')
-    if st.button("ENTRAR"):
-        st.session_state.username = username
-        login(username, password)
+    
+    col1, col2, col3 = st.columns([1,0.1,1])
+    with col3: 
+        if st.button("CADASTRAR"):
+            print("CADASTRAR")
+    with col1:
+        if st.button("ENTRAR"):
+            st.session_state.username = username
+            login()
         
 else:
      #TELA PRINCIPAL
