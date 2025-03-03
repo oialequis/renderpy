@@ -47,7 +47,7 @@ def botao_teste():
 
 ##STREAMLIT##
 
-st.title("Upload de Arquivo XLSX")
+st.title("Redução de SRA")
 uploaded_file = st.file_uploader("Escolha um arquivo XLSX", type=["xlsx"])
 
 ##########
