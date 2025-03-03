@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 import os
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 655b46e (Atualização do código)
 
 
 def botao_teste():
@@ -47,7 +52,11 @@ def botao_teste():
 
 ##STREAMLIT##
 
+<<<<<<< HEAD
 st.title("Redução de SRA")
+=======
+st.title("REDUÇÃO DE SRA")
+>>>>>>> 655b46e (Atualização do código)
 uploaded_file = st.file_uploader("Escolha um arquivo XLSX", type=["xlsx"])
 
 ##########
