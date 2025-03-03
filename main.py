@@ -10,11 +10,10 @@ usuarios_permitidos = ["Alex","Beatriz"]
 def botao_teste():
     usuario_atual = getpass.getuser()
     if usuario_atual in usuarios_permitidos:
-        print("USUÁRIO PERMITIDO")
-        st.title("PERMISSÃO CONCEDIDA")
+        st.title(f"PERMISSÃO CONCEDIDA",{usuario_atual})
     else:
         print("USUARIO NAO TA NA LISTA DE PERMISSAO")
-        st.title("PERMISSÃO NEGADA")
+        st.title(f"PERMISSÃO NEGADA",{usuario_atual})
     df = pd.read_excel(uploaded_file)
     df = df.drop(0)
     df.columns = df.loc[1]
