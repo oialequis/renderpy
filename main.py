@@ -1,9 +1,20 @@
 import streamlit as st
 import pandas as pd
 import os
+import getpass
 
+usuarios_permitidos = ["Alex","Beatriz"]
+
+    
 
 def botao_teste():
+    usuario_atual = getpass.getuser()
+    if usuario_atual in usuarios_permitidos:
+        print("USUÁRIO PERMITIDO")
+        st.title("PERMISSÃO CONCEDIDA")
+    else:
+        print("USUARIO NAO TA NA LISTA DE PERMISSAO")
+        st.title("PERMISSÃO NEGADA")
     df = pd.read_excel(uploaded_file)
     df = df.drop(0)
     df.columns = df.loc[1]
