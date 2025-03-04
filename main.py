@@ -1,13 +1,40 @@
 import streamlit as st
 import pandas as pd
 import sqlite3 as db
+from io import BytesIO
+import requests
+
+
+
+# Função para obter o arquivo do GitHub
+def get_github_file(repo_owner, repo_name, file_path, token):
+    # URL para acessar o arquivo do repositório privado
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
+    
+    # Cabeçalhos para autenticação
+    headers = {'Authorization': f'token {token}'}
+    
+    # Requisição para obter as informações do arquivo
+    response = requests.get(url, headers=headers)
+    
+    # Verificando se a requisição foi bem-sucedida
+    if response.status_code == 200:
+        file_url = response.json()['download_url']
+        # Baixando o arquivo diretamente
+        file_response = requests.get(file_url)
+        return BytesIO(file_response.content)  # Retorna o conteúdo do arquivo
+    else:
+        st.error("Erro ao acessar o arquivo no GitHub")
+        return None
 
 
 
 
-# Criar um link direto para exibir a imagem
-image_url = f"https://drive.google.com/uc?export=view&id=1FtkhmnlAUWmGaFxXDn374UsWZ0k8IYpB"
-
+# Informações do repositório GitHub
+repo_owner = "oialequis"  # Substitua pelo nome de usuário do GitHub
+repo_name = "renderpy"  # Substitua pelo nome do repositório
+file_path = "teste.jpg"  # Substitua pelo caminho do arquivo
+github_token = "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"  # Substitua pelo seu token de acesso
 
 
 
@@ -73,7 +100,8 @@ else:
       if st.button("Enviar arquivo."):
         botao_enviar()
    else:
-       st.title("PAINEL DE USUÁRIO.")
-       st.image(image_url, caption="Imagem carregada do Google Drive")
+       file = get_github_file(repo_owner, repo_name, file_path, github_token)
+       st.title("PAINEL DE USUÁRIO..")
+       st.image(file, caption="Imagem carregada do Google Drive")
       
      
