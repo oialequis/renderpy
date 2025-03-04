@@ -74,8 +74,7 @@ else:
       if st.button("Enviar arquivo."):
         botao_enviar()
    else:
-       st.title("PAINEL DE USUÁRIO")
-       # Exibir a imagem no app
+       st.title("PAINEL DE USUÁRIO.")
        st.image(image_url, caption="Imagem carregada do Google Drive")
       
      
