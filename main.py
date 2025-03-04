@@ -35,9 +35,6 @@ repo_owner = "oialequis"  # Substitua pelo nome de usuário do GitHub
 repo_name = "renderpy"  # Substitua pelo nome do repositório
 file_path = "teste.jpg"  # Substitua pelo caminho do arquivo
 
-
-
-
 # Criar conexão com o banco de dados SQLite
 conn = db.connect("database.db", check_same_thread=False)
 cursor = conn.cursor()
