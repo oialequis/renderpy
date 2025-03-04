@@ -34,7 +34,7 @@ def get_github_file(repo_owner, repo_name, file_path, token):
 repo_owner = "oialequis"  # Substitua pelo nome de usuário do GitHub
 repo_name = "renderpy"  # Substitua pelo nome do repositório
 file_path = "teste.jpg"  # Substitua pelo caminho do arquivo
-github_token = "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"  # Substitua pelo seu token de acesso
+
 
 
 
