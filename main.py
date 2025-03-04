@@ -4,10 +4,9 @@ import sqlite3 as db
 
 
 
-google_drive_id = "1FtkhmnlAUWmGaFxXDn374UsWZ0k8IYpB"
 
 # Criar um link direto para exibir a imagem
-image_url = f"https://drive.google.com/uc?export=view&id={google_drive_id}"
+image_url = f"https://drive.google.com/file/d/1FtkhmnlAUWmGaFxXDn374UsWZ0k8IYpB/view?usp=sharing"
 
 
 
