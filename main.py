@@ -7,12 +7,12 @@ import requests
 github_token = st.secrets["GITHUB_TOKEN"]
 
 # Função para obter o arquivo do GitHub
-def get_github_file(repo_owner, repo_name, file_path, token):
+def get_github_file(repo_owner, repo_name, file_path, github_token):
     # URL para acessar o arquivo do repositório privado
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
     
     # Cabeçalhos para autenticação
-    headers = {'Authorization': f'token {token}'}
+    headers = {'Authorization': f'token {github_token}'}
     
     # Requisição para obter as informações do arquivo
     response = requests.get(url, headers=headers)
@@ -98,7 +98,7 @@ else:
       if st.button("Enviar arquivo."):
         botao_enviar()
    else:
-       file = get_github_file(repo_owner, repo_name, file_path, token)
+       file = get_github_file(repo_owner, repo_name, file_path, github_token)
        st.title("PAINEL DE USUÁRIO...")
        st.image(file, caption="Imagem carregada do Google Drive")
       
