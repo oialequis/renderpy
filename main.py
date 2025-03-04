@@ -4,27 +4,42 @@ import sqlite3 as db
 from io import BytesIO
 import requests
 
+
+# Carregar o token do GitHub armazenado no secrets.toml
 github_token = st.secrets["GITHUB_TOKEN"]
 
-# Função para obter o arquivo do GitHub
+# Função para acessar o arquivo no GitHub
 def get_github_file(repo_owner, repo_name, file_path):
-    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
-    headers = {'Authorization': f'token {github_token}'}
+    # URL da API do GitHub para acessar o conteúdo do arquivo
+    url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
     
+    # Cabeçalhos para autenticação usando o token
+    headers = {
+        "Authorization": f"token {github_token}"
+    }
+    
+    # Requisição para obter o arquivo
     response = requests.get(url, headers=headers)
     
     if response.status_code == 200:
+        # Obter o link de download do arquivo
         file_url = response.json()['download_url']
+        
+        # Baixar o arquivo
         file_response = requests.get(file_url)
+        
+        # Retornar o conteúdo do arquivo
         return file_response.content
     else:
-        st.error("Erro ao acessar o arquivo no GitHub")
+        st.error(f"Erro ao acessar o arquivo: {response.status_code}")
         return None
+    
 
-# Chamar a função com os dados do repositório
-repo_owner = "oialequis"
-repo_name = "renderpy"
-file_path = "teste.jpg"
+
+# Informações do repositório
+repo_owner = "oialequis"  # Substitua pelo nome do proprietário do repositório
+repo_name = "renderpy"  # Substitua pelo nome do repositório
+file_path = "teste.jpg"  # Substitua pelo caminho do arquivo no repositório
 
 file_content = get_github_file(repo_owner, repo_name, file_path)
 
