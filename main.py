@@ -6,7 +6,7 @@ import sqlite3 as db
 
 
 # Criar um link direto para exibir a imagem
-image_url = f"https://drive.google.com/file/d/1FtkhmnlAUWmGaFxXDn374UsWZ0k8IYpB/view?usp=sharing"
+image_url = f"https://drive.google.com/uc?export=view&id=1FtkhmnlAUWmGaFxXDn374UsWZ0k8IYpB"
 
 
 
