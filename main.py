@@ -4,7 +4,7 @@ import sqlite3 as db
 from io import BytesIO
 import requests
 
-
+github_token = st.secrets["GITHUB_TOKEN"]
 
 # Função para obter o arquivo do GitHub
 def get_github_file(repo_owner, repo_name, file_path, token):
@@ -73,6 +73,7 @@ if 'show_login' not in st.session_state:
     st.session_state.show_login = True
 
 if st.session_state.show_login:
+    st.write(github_token)
     st.title("ENTRAR")
     username = st.text_input("USUÁRIO")
     password = st.text_input("SENHA", type='password')
