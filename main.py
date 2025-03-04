@@ -98,7 +98,7 @@ else:
         botao_enviar()
    else:
        file = get_github_file(repo_owner, repo_name, file_path, token)
-       st.title("PAINEL DE USUÁRIO..")
+       st.title("PAINEL DE USUÁRIO...")
        st.image(file, caption="Imagem carregada do Google Drive")
       
      
