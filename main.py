@@ -7,33 +7,26 @@ import requests
 github_token = st.secrets["GITHUB_TOKEN"]
 
 # Função para obter o arquivo do GitHub
-def get_github_file(repo_owner, repo_name, file_path, github_token):
-    # URL para acessar o arquivo do repositório privado
+def get_github_file(repo_owner, repo_name, file_path):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}'
-    
-    # Cabeçalhos para autenticação
     headers = {'Authorization': f'token {github_token}'}
     
-    # Requisição para obter as informações do arquivo
     response = requests.get(url, headers=headers)
     
-    # Verificando se a requisição foi bem-sucedida
     if response.status_code == 200:
         file_url = response.json()['download_url']
-        # Baixando o arquivo diretamente
         file_response = requests.get(file_url)
-        return BytesIO(file_response.content)  # Retorna o conteúdo do arquivo
+        return file_response.content
     else:
         st.error("Erro ao acessar o arquivo no GitHub")
         return None
 
+# Chamar a função com os dados do repositório
+repo_owner = "oialequis"
+repo_name = "renderpy"
+file_path = "teste.jpg"
 
-
-
-# Informações do repositório GitHub
-repo_owner = "oialequis"  # Substitua pelo nome de usuário do GitHub
-repo_name = "renderpy"  # Substitua pelo nome do repositório
-file_path = "teste.jpg"  # Substitua pelo caminho do arquivo
+file_content = get_github_file(repo_owner, repo_name, file_path)
 
 # Criar conexão com o banco de dados SQLite
 conn = db.connect("database.db", check_same_thread=False)
@@ -98,8 +91,7 @@ else:
       if st.button("Enviar arquivo."):
         botao_enviar()
    else:
-       file = get_github_file(repo_owner, repo_name, file_path, github_token)
        st.title("PAINEL DE USUÁRIO...")
-       st.image(file, caption="Imagem carregada do Google Drive")
+       st.image(file_content, caption="Imagem carregada do Google Drive")
       
      
